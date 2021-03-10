@@ -53,5 +53,11 @@ public class ProductController {
         return "redirect:/";
     }
 
+    @GetMapping("/sayHi")
+    public String ajax(Model model) {
+        model.addAttribute("products", productService.readAll());
+        return "SayHi";
+    }
+
 
 }

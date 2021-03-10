@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Test</title>
+</head>
+<body>
+    <h1>Produkt oversigt</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Navn</th>
+            <th>Pris</th>
+            <td></td>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productID}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.productPrice} + ' kr.'"></td>
+        </tr>
+    </table>
+
+    <p class="productName">
+
+    </p>
+
+    <p class="productPrice">
+
+    </p>
+
+
+    <input id="choice">
+    <button id="search"> Vælg et produkt </button>
+
+
+<script>
+    $(document).ready (function(){
+        /*$ajax({
+            url: "http://localhost:8080/products/10"
+        }).then(function (data){
+            $('.productName').html(data.productName);
+            $('.productPrice').html(data.productPrice);
+        });*/
+
+
+        $('#search').click(
+    function(){
+        let choice = document.getElementById("choice").value;
+        let url = "http://localhost:8080/products/" + choice;
+        alert(url);
+        $.ajax({
+            url: url
+        }).then(function (data){
+            $('.productName').html(data.productName);
+            $('.productPrice').html(data.productPrice);
+        })
+    });
+
+    })
+
+</script>
+
+</body>
+</html>
